@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加活动 - 鹭云集团活动平台</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>鹭云集团活动平台 - 后台管理中心</h1>
+        </div>
+    </header>    
+    <div class="container">
+        <h2>添加新活动</h2>
+        <div class="form-container">
+            <form action="/admin/add-event" method="POST">
+                <div class="form-group">
+                    <label for="title">活动标题 *</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="startTime">活动时间 *</label>
+                    <input type="datetime-local" id="startTime" name="startTime" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="departure">出发地 *</label>
+                    <input type="text" id="departure" name="departure" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="arrival">目的地 *</label>
+                    <input type="text" id="arrival" name="arrival" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>限制机型（可多选，不选则表示无限制）</label>
+                    <div class="aircraft-types">
+                        <div class="aircraft-type">
+                            <input type="checkbox" id="aircraft-b737" name="aircraftTypes" value="波音737">
+                            <label for="aircraft-b737">波音737</label>
+                        </div>
+                        <div class="aircraft-type">
+                            <input type="checkbox" id="aircraft-b747" name="aircraftTypes" value="波音747">
+                            <label for="aircraft-b747">波音747</label>
+                        </div>
+                        <div class="aircraft-type">
+                            <input type="checkbox" id="aircraft-b777" name="aircraftTypes" value="波音777">
+                            <label for="aircraft-b777">波音777</label>
+                        </div>
+                        <div class="aircraft-type">
+                            <input type="checkbox" id="aircraft-b787" name="aircraftTypes" value="波音787">
+                            <label for="aircraft-b787">波音787</label>
+                        </div>
+                        <div class="aircraft-type">
+                            <input type="checkbox" id="aircraft-a320" name="aircraftTypes" value="空客A320">
+                            <label for="aircraft-a320">空客A320</label>
+                        </div>
+                        <div class="aircraft-type">
+                            <input type="checkbox" id="aircraft-a330" name="aircraftTypes" value="空客A330">
+                            <label for="aircraft-a330">空客A330</label>
+                        </div>
+                        <div class="aircraft-type">
+                            <input type="checkbox" id="aircraft-a350" name="aircraftTypes" value="空客A350">
+                            <label for="aircraft-a350">空客A350</label>
+                        </div>
+                        <div class="aircraft-type">
+                            <input type="checkbox" id="aircraft-a380" name="aircraftTypes" value="空客A380">
+                            <label for="aircraft-a380">空客A380</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="details">活动详情</label>
+                    <textarea id="details" name="details" rows="8" placeholder="请输入活动的详细描述信息..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn">保存活动</button>
+                <a href="/admin" class="btn btn-secondary">取消</a>
+            </form>
+        </div>
+    </div>
+    
+
+</body>
+</html>

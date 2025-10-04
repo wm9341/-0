@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台管理 - 鹭云集团活动平台</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>鹭云集团活动平台 - 后台管理中心</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="admin-actions">
+            <a href="/admin/add-event" class="btn btn-primary">添加新活动</a>
+            <a href="/admin/users" class="btn btn-secondary">用户管理</a>
+        </div>
+        
+        <h2>活动列表</h2>
+        
+        <table class="event-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>活动标题</th>
+                    <th>活动时间</th>
+                    <th>航线</th>
+                    <th>限制机型</th>
+                    <th>参与人数</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (locals.events.length === 0) { %>
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 2rem;">暂无活动</td>
+                    </tr>
+                <% } else { %>
+                    <% locals.events.forEach(event => { %>
+                        <tr>
+                            <td><%= event.id %></td>
+                            <td><%= event.title %></td>
+                            <td><%= new Date(event.startTime).toLocaleString() %></td>
+                            <td><%= event.departure %> → <%= event.arrival %></td>
+                            <td>
+                                <% if (event.aircraftTypes && event.aircraftTypes.length > 0) { %>
+                                    <%= event.aircraftTypes.join(', ') %>
+                                <% } else { %>
+                                    无限制
+                                <% } %>
+                            </td>
+                            <td><span class="participant-count"><%= event.participantCount %></span></td>
+                            <td>
+                                <a href="/event/<%= event.id %>" class="btn btn-secondary" target="_blank">查看详情</a>
+                                <form action="/admin/events/delete/<%= event.id %>" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('确定要删除此活动吗？');">删除</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } %>
+            </tbody>
+        </table>
+        
+        <h2 style="margin-top: 3rem;">用户概览</h2>
+        
+        <div class="user-stats">
+            <div class="stat-item">
+                <span class="stat-label">总用户数：</span>
+                <span class="stat-value"><%= locals.users.length %></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">管理员用户：</span>
+                <span class="stat-value"><%= locals.users.filter(u => u.isAdmin).length %></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">普通用户：</span>
+                <span class="stat-value"><%= locals.users.filter(u => !u.isAdmin).length %></span>
+            </div>
+        </div>
+        
+        <p style="margin-top: 1rem;">
+            <a href="/admin/users" class="btn btn-link">查看完整用户列表及管理</a>
+        </p>
+    </div>
+    
+
+</body>
+</html>

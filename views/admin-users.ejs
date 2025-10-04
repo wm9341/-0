@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户管理 - 鹭云集团活动平台</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>鹭云集团活动平台 - 后台管理中心</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>用户管理</h2>
+        
+        <p class="user-stats">共有 <%= users.length %> 个用户</p>
+        
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户名</th>
+                    <th>角色</th>
+                    <th>注册时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (users.length === 0) { %>
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 2rem;">暂无用户</td>
+                    </tr>
+                <% } else { %>
+                    <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.id %></td>
+                            <td><%= user.username %></td>
+                            <td><%= user.isAdmin ? '管理员' : '普通用户' %></td>
+                            <td><%= new Date(user.createdAt).toLocaleString() %></td>
+                            <td>
+                                <form action="/admin/users/toggle-admin/<%= user.id %>" method="post" style="display: inline;">
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('确定要<%= user.isAdmin ? '取消管理员权限' : '设置为管理员' %>吗？')">
+                                        <%= user.isAdmin ? '取消管理员' : '设为管理员' %>
+                                    </button>
+                                </form>
+                                <% if (!user.isAdmin || users.filter(u => u.isAdmin).length > 1) { %>
+                                    <form action="/admin/users/delete/<%= user.id %>" method="post" style="display: inline;">
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('确定要删除用户 <%= user.username %> 吗？')">删除</button>
+                                    </form>
+                                <% } else { %>
+                                    <span class="btn-disabled">删除</span>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } %>
+            </tbody>
+        </table>
+        
+        <h3 style="margin-top: 2rem;">用户统计</h3>
+        <div class="user-stats">
+            <div class="stat-item">
+                <span class="stat-label">管理员用户：</span>
+                <span class="stat-value"><%= users.filter(u => u.isAdmin).length %></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">普通用户：</span>
+                <span class="stat-value"><%= users.filter(u => !u.isAdmin).length %></span>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,747 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+/* 通用组件样式 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-right: 1rem;
+}
+
+.btn-primary {
+    background-color: #4361ee;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: #3a0ca3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+}
+
+.btn-secondary {
+    background-color: #64748b;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: #475569;
+}
+
+.btn-secondary {
+    background: #4cc9f0;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #3a0ca3;
+}
+
+.btn-danger {
+    background: #f72585;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #7209b7;
+}
+
+.btn-link {
+    background: none;
+    color: #4361ee;
+    text-decoration: underline;
+    padding: 0;
+    margin-right: 0;
+}
+
+.btn-link:hover {
+    background: none;
+    color: #3a0ca3;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4cc9f0;
+    box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.1);
+}
+
+.form-note {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 0.25rem;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* 登录表单特定样式 */
+.login-form {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #4361ee;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form button.btn-primary {
+    width: 100%;
+    max-width: 250px;
+    margin: 1.5rem auto 0;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    text-align: center;
+}
+
+/* 参与者列表样式 */
+.participants-list {
+    margin-top: 3rem;
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.participants-list h3 {
+    color: #4361ee;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.participants-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.participants-table th {
+    background-color: #f8fafc;
+    color: #4a5568;
+    text-align: left;
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.participants-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.participants-table tr:hover {
+    background-color: #f8fafc;
+}
+
+.participants-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 头部样式 */
+header {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.nav-link.active {
+    background-color: rgba(255,255,255,0.3);
+    font-weight: bold;
+}
+
+.welcome-message {
+    color: #ecf0f1;
+    font-size: 0.95rem;
+    margin-right: 1rem;
+}
+
+.admin-link {
+    background-color: #f72585;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.admin-link:hover {
+    background-color: #b5179e;
+}
+
+/* 页面标题 */
+.page-header {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.page-header h2 {
+    color: #4361ee;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+/* 活动网格 */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 1.5rem;
+}
+
+/* 活动卡片样式 */
+.event-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid #4361ee;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.event-card-header {
+    margin-bottom: 1rem;
+}
+
+.event-title {
+    font-size: 1.5rem;
+    color: #4361ee;
+    margin-bottom: 0.5rem;
+}
+
+.event-date {
+    color: #f72585;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.event-card-body {
+    margin-bottom: 1.5rem;
+}
+
+.event-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: #64748b;
+}
+
+.event-info-item i {
+    color: #4361ee;
+    margin-right: 0.5rem;
+    width: 18px;
+    text-align: center;
+}
+
+.event-card-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.view-details-btn {
+    background-color: #4361ee;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+    background-color: #3a0ca3;
+}
+
+.event-info {
+    margin-bottom: 1rem;
+    color: #64748b;
+}
+
+.event-info span {
+    margin-right: 1rem;
+}
+
+/* 表格样式 */
+.event-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.event-table th,
+.event-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.event-table th {
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+.event-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* 计数显示 */
+.participant-count {
+    background: #4cc9f0;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+/* 页面特定容器 */
+.event-detail,
+.participation-form,
+.form-container {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* 链接样式 */
+.back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #4361ee;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.admin-link,
+.back-to-front {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #f72585;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+.admin-link:hover,
+.back-to-front:hover {
+    background: #7209b7;
+}
+
+/* 页脚样式 */
+footer {
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+    color: #64748b;
+    margin-top: 3rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links a {
+    color: #4361ee;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #3a0ca3;
+    text-decoration: underline;
+}
+
+.footer-copyright {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+/* 限制机型选择样式 */
+.aircraft-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.aircraft-type {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.aircraft-type input {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+/* 登录/注册表单样式 */
+.login-form,
+.register-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.login-form h2,
+.register-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #4361ee;
+}
+
+.login-link,
+.register-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.login-link a,
+.register-link a {
+    color: #4361ee;
+    text-decoration: none;
+}
+
+.login-link a:hover,
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* 导航样式 */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+nav a:hover {
+    opacity: 0.8;
+}
+
+/* 用户管理样式 */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.user-table th,
+.user-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.user-table th {
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+.user-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* 用户统计样式 */
+.user-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+}
+
+.stat-label {
+    font-weight: bold;
+    color: #4a5568;
+    margin-right: 0.5rem;
+}
+
+.stat-value {
+    background: #4cc9f0;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* 登录信息和用户信息样式 */
+.login-info,
+.user-info {
+    background: #e6f7ff;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.user-info p {
+    margin-bottom: 0.5rem;
+}
+
+.login-required {
+    background: #fff3cd;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.login-required a {
+    color: #4361ee;
+    text-decoration: none;
+}
+
+.login-required a:hover {
+    text-decoration: underline;
+}
+
+/* 禁用表单样式 */
+form[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+input[disabled],
+button[disabled] {
+    cursor: not-allowed;
+    background-color: #e9ecef;
+    color: #6c757d;
+}
+
+/* 按钮禁用样式 */
+.btn-disabled {
+    display: inline-block;
+    background: #6c757d;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    cursor: not-allowed;
+    font-size: 1rem;
+    margin-right: 1rem;
+    opacity: 0.6;
+}
+
+/* 活动详情标题样式 */
+.event-detail-title {
+    color: #4361ee;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+/* 活动详情样式 */
+.event-details {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border-left: 4px solid #4361ee;
+}
+
+.event-details h3 {
+  margin-top: 0;
+  color: #4361ee;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.event-details-content {
+  line-height: 1.8;
+  color: #333;
+  white-space: pre-line;
+}
+
+.event-details-content br {
+  margin-bottom: 8px;
+}
+
+/* 管理操作区域 */
+.admin-actions {
+    margin-bottom: 2rem;
+    text-align: center;
+}

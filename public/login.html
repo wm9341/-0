@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鹭云集团活动平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4b0082, #6a0dad);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-title {
+            text-align: left;
+        }
+        
+        .header-title h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        .header-title p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        .events-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .events-section h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #4b0082;
+        }
+        
+        .events-section p {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        
+        .event-card h3 {
+            color: #4b0082;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .event-date {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .event-details {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .event-detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #666;
+        }
+        
+        .event-detail-item i {
+            margin-right: 8px;
+            color: #9370db;
+        }
+        
+        .view-details-btn {
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .view-details-btn:hover {
+            background-color: #4b0082;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <h1>鹭云集团活动平台</h1>
+                <p>参与我们的航空活动，体验飞行的魅力</p>
+            </div>
+            <div class="header-nav">
+                <a href="#events" class="nav-btn">活动列表</a>
+                <a href="register.html" class="nav-btn">免费注册</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section id="events" class="events-section">
+            <h2>最新活动</h2>
+            <p>参与我们的航空活动，体验飞行的魅力</p>
+            
+            <div class="events-grid">
+                <!-- 活动卡片 1 -->
+                <div class="event-card">
+                    <h3>2025年夏季航空展</h3>
+                    <div class="event-date">2025/7/15</div>
+                    <div class="event-details">
+                        <div class="event-detail-item">
+                            <i>📅</i> 2025/7/15 09:00:00
+                        </div>
+                        <div class="event-detail-item">
+                            <i>✈️</i> 北京 - 上海
+                        </div>
+                        <div class="event-detail-item">
+                            <i>🛫</i> 波音737, 空客A320
+                        </div>
+                    </div>
+                    <a href="#" class="view-details-btn">查看详情</a>
+                </div>
+                
+                <!-- 活动卡片 2 -->
+                <div class="event-card">
+                    <h3>国际航空运输论坛</h3>
+                    <div class="event-date">2025/8/10</div>
+                    <div class="event-details">
+                        <div class="event-detail-item">
+                            <i>📅</i> 2025/8/10 10:00:00
+                        </div>
+                        <div class="event-detail-item">
+                            <i>✈️</i> 广州 - 深圳
+                        </div>
+                        <div class="event-detail-item">
+                            <i>🛫</i> 波音777, 空客A350
+                        </div>
+                    </div>
+                    <a href="#" class="view-details-btn">查看详情</a>
+                </div>
+                
+                <!-- 活动卡片 3 -->
+                <div class="event-card">
+                    <h3>新一代客机体验活动</h3>
+                    <div class="event-date">2025/9/1</div>
+                    <div class="event-details">
+                        <div class="event-detail-item">
+                            <i>📅</i> 2025/9/1 14:00:00
+                        </div>
+                        <div class="event-detail-item">
+                            <i>✈️</i> 成都 - 杭州
+                        </div>
+                    </div>
+                    <a href="#" class="view-details-btn">查看详情</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="view-details-btn" style="display: inline-block; width: auto; padding: 12px 40px;">查看更多活动</a>
+            </div>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <p>© 2025 鹭云集团活动平台 版权所有</p>
+    </footer>
+    
+    <script>
+        // 简单的交互效果
+        document.querySelectorAll('.view-details-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('查看活动详情功能正在开发中...');
+            });
+        });
+    </script>
+</body>
+</html>

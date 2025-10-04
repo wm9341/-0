@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= event.title %> - 鹭云集团活动平台</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>鹭云集团活动平台</h1>
+            <nav>
+                <a href="/">首页</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h2 class="event-detail-title"><%= event.title %></h2>
+        
+        <div class="event-detail">
+            <div class="participant-count">已有 <%= participantCount %> 人参加</div>
+            
+            <div class="event-info">
+                <p><strong>活动时间：</strong><%= new Date(event.startTime).toLocaleString() %></p>
+                <p><strong>航线：</strong><%= event.departure %> → <%= event.arrival %></p>
+                <% if (event.aircraftTypes && event.aircraftTypes.length > 0) { %>
+                    <p><strong>限制机型：</strong><%= event.aircraftTypes.join(', ') %></p>
+                <% } else { %>
+                    <p><strong>限制机型：</strong>无限制</p>
+                <% } %>
+                
+                <% if (event.details && event.details.trim()) { %>
+                    <div class="event-details">
+                        <h3>活动详情</h3>
+                        <div class="event-details-content">
+                            <%= event.details.replace(/\n/g, '<br>') %>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        
+        <div class="participation-form">
+            <h2>参加活动</h2>
+            
+            <% if (user) { %>
+                <p class="login-info">请填写以下信息参加活动：</p>
+                <form action="/event/<%= event.id %>/participate" method="POST">
+                    <div class="form-group">
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" name="name" value="<%= user.username || '' %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="qq">QQ号 *</label>
+                        <input type="text" id="qq" name="qq" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="aircraftType">选择机型 *</label>
+                        <select id="aircraftType" name="aircraftType" required>
+                            <option value="">请选择机型</option>
+                            <% if (event.aircraftTypes && event.aircraftTypes.length > 0) { %>
+                                <% event.aircraftTypes.forEach(type => { %>
+                                    <option value="<%= type %>"><%= type %></option>
+                                <% }) %>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flightNumber">航班号 *</label>
+                        <input type="text" id="flightNumber" name="flightNumber" required>
+                    </div>
+                    <button type="submit" class="btn">确认参加</button>
+                </form>
+            <% } else { %>
+                <p class="login-required">请先<a href="/login">登录</a>或<a href="/register">注册</a>后再参加活动</p>
+                <form action="/event/<%= event.id %>/participate" method="POST" disabled>
+                    <div class="form-group">
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" name="name" required disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="qq">QQ号 *</label>
+                        <input type="text" id="qq" name="qq" required disabled>
+                    </div>
+                    <div class="form-group">
+                            <label for="aircraftType">选择机型 *</label>
+                            <select id="aircraftType" name="aircraftType" required disabled>
+                                <option value="">请选择机型</option>
+                                <% if (event.aircraftTypes && event.aircraftTypes.length > 0) { %>
+                                    <% event.aircraftTypes.forEach(type => { %>
+                                        <option value="<%= type %>"><%= type %></option>
+                                    <% }) %>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="flightNumber">航班号 *</label>
+                            <input type="text" id="flightNumber" name="flightNumber" required disabled>
+                        </div>
+                    <button type="submit" class="btn" disabled>确认参加</button>
+                </form>
+            <% } %>
+        </div>
+        
+        <a href="/" class="back-link">← 返回活动列表</a>
+        
+        <% if (participants && participants.length > 0) { %>
+        <div class="participants-list">
+            <h3>已参加人员</h3>
+            <table class="participants-table">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>QQ号</th>
+                        <th>机型</th>
+                        <th>航班号</th>
+                        <th>参加时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% participants.forEach(participant => { %>
+                    <tr>
+                            <td><%= participant.name %></td>
+                            <td><%= participant.qq || '未提供' %></td>
+                            <td><%= participant.aircraftType || '无' %></td>
+                            <td><%= participant.flightNumber || '未提供' %></td>
+                            <td><%= new Date(participant.participateTime).toLocaleString() %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <% } %>
+    
+
+</body>
+</html>

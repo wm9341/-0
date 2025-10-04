@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录 - 鹭云集团活动平台</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <style>
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ef9a9a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>鹭云集团活动平台</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="login-form">
+            <h2>用户登录</h2>
+            <% if (locals.error) { %>
+                <div class="error-message"><%= locals.error %></div>
+            <% } %>
+            <form id="loginForm" action="/login" method="post">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">登录</button>
+            </form>
+            <p class="register-link">还没有账号？<a href="/register">立即注册</a></p>
+        </section>
+    </main>
+
+
+    
+    <script>
+        // 表单提交处理
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 客户端表单验证
+            if (!username || !password) {
+                alert('请填写用户名和密码！');
+                event.preventDefault(); // 阻止表单提交
+                return;
+            }
+            
+            // 如果验证通过，表单会继续提交到服务器
+        });
+    </script>
+</body>
+</html>
