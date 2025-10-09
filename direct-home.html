@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鹭云集团活动平台 - 首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
+        
+        .nav-item {
+            margin-left: 20px;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .login-btn, .register-btn {
+            padding: 8px 16px;
+            border: 1px solid white;
+            background-color: transparent;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover, .register-btn:hover {
+            background-color: white;
+            color: #1890ff;
+        }
+        
+        .main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .activity-list {
+            text-align: center;
+        }
+        
+        .activity-list h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #1890ff;
+        }
+        
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+        
+        .activity-card {
+            width: 100%;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-image {
+            height: 180px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .detail-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .image-text {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .card-time, .card-participants {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .time-icon, .participants-icon {
+            margin-right: 5px;
+        }
+        
+        .card-description {
+            margin: 15px 0;
+            color: #666;
+            line-height: 1.5;
+            height: 72px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        .card-actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .view-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #1890ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .view-btn:hover {
+            background-color: #096dd9;
+        }
+        
+        .no-activities {
+            margin-top: 60px;
+            color: #999;
+            font-size: 18px;
+        }
+        
+        .loading {
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f0f0f0;
+            border-top: 4px solid #1890ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer-copyright {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .logo {
+                margin-bottom: 20px;
+            }
+            
+            .nav-list {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .nav {
+                flex-direction: column;
+            }
+            
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">鹭云集团活动平台</a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#" class="nav-link">首页</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">活动</a></li>
+                </ul>
+                <button class="login-btn">登录</button>
+                <button class="register-btn">注册</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="activity-list">
+            <h2>最新活动</h2>
+            <div class="activities-grid">
+                <!-- 活动卡片1 -->
+                <div class="activity-card">
+                    <div class="card-image" style="background-color: #1890ff;"><div class="image-text">南航会员日</div></div>
+                    <div class="card-content">
+                        <h3 class="card-title">南航会员日特惠活动</h3>
+                        <p class="card-time">
+                            <span class="time-icon">🕒</span> 2023-12-15 10:00
+                        </p>
+                        <p class="card-participants">
+                            <span class="participants-icon">👥</span> 128人参与
+                        </p>
+                        <p class="card-description">
+                            南航会员专享折扣，国内航线低至5折，国际航线7折起。活动期间购买机票还可获得双倍里程积分。名额有限，先到先得！
+                        </p>
+                        <div class="card-actions">
+                            <a href="#" class="view-btn">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 活动卡片2 -->
+                <div class="activity-card">
+                    <div class="card-image" style="background-color: #52c41a;"><div class="image-text">鹭云集团优惠</div></div>
+                    <div class="card-content">
+                        <h3 class="card-title">鹭云集团环球旅行优惠</h3>
+                        <p class="card-time">
+                            <span class="time-icon">🕒</span> 2024-01-05 09:30
+                        </p>
+                        <p class="card-participants">
+                            <span class="participants-icon">👥</span> 85人参与
+                        </p>
+                        <p class="card-description">
+                            鹭云集团成员航空公司联合推出环球旅行套票，一次购买多段航程享更多优惠。支持灵活变更行程，满足您的旅行需求。
+                        </p>
+                        <div class="card-actions">
+                            <a href="#" class="view-btn">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 活动卡片3 -->
+                <div class="activity-card">
+                    <div class="card-image" style="background-color: #faad14;"><div class="image-text">新年促销</div></div>
+                    <div class="card-content">
+                        <h3 class="card-title">新年机票促销活动</h3>
+                        <p class="card-time">
+                            <span class="time-icon">🕒</span> 2024-01-20 14:00
+                        </p>
+                        <p class="card-participants">
+                            <span class="participants-icon">👥</span> 203人参与
+                        </p>
+                        <p class="card-description">
+                            迎接新年，南航推出机票促销活动，热门城市航线低至4折。提前30天预订还可享受额外9折优惠。春节出行的旅客不要错过！
+                        </p>
+                        <div class="card-actions">
+                            <a href="#" class="view-btn">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 活动卡片4 -->
+                <div class="activity-card">
+                    <div class="card-image" style="background-color: #eb2f96;"><div class="image-text">会员专享</div></div>
+                    <div class="card-content">
+                        <h3 class="card-title">高端会员专享活动</h3>
+                        <p class="card-time">
+                            <span class="time-icon">🕒</span> 2024-02-10 15:30
+                        </p>
+                        <p class="card-participants">
+                            <span class="participants-icon">👥</span> 42人参与
+                        </p>
+                        <p class="card-description">
+                            南航明珠金银卡会员专享活动，参与即可获得优先登机、额外行李额、贵宾室体验等特权。更有机会获得免费升舱券。
+                        </p>
+                        <div class="card-actions">
+                            <a href="#" class="view-btn">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">鹭云集团活动平台</div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">联系我们</a>
+                <a href="#" class="footer-link">隐私政策</a>
+                <a href="#" class="footer-link">用户协议</a>
+            </div>
+            <div class="footer-copyright">
+                © 2023 鹭云集团活动平台. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* 模态框样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #333;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .close-btn:hover {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+        
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #1890ff;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #1890ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #096dd9;
+        }
+        
+        .submit-btn:disabled {
+            background-color: #d9d9d9;
+            cursor: not-allowed;
+        }
+        
+        .error-message {
+            color: #ff4d4f;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background-color: #fff2f0;
+            border: 1px solid #ffccc7;
+            border-radius: 4px;
+        }
+        
+        /* 用户信息区域样式 */
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        .user-name {
+            margin-right: 15px;
+        }
+        
+        .logout-btn {
+            padding: 6px 12px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 活动详情页面样式 */
+        .activity-detail {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .detail-header {
+            margin-bottom: 30px;
+        }
+        
+        .detail-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .detail-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .detail-meta-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .detail-meta-item i {
+            margin-right: 8px;
+        }
+        
+        .detail-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .detail-content {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .join-btn {
+            padding: 12px 30px;
+            background-color: #52c41a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .join-btn:hover {
+            background-color: #389e0d;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .detail-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .detail-image {
+                height: 200px;
+            }
+        }
+    </style>
+    
+    <!-- 登录模态框 -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="login-modal-title">用户登录</h2>
+                <button class="close-btn" id="close-login">&times;</button>
+            </div>
+            <div id="login-error" class="error-message" style="display: none;"></div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" placeholder="请输入用户名" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" placeholder="请输入密码" required>
+                </div>
+                <div class="form-group" id="confirm-password-container">
+                    <label for="confirm-password">确认密码</label>
+                    <input type="password" id="confirm-password" placeholder="请再次输入密码" required>
+                </div>
+                <button type="submit" class="submit-btn" id="login-submit">登录</button>
+                <div class="switch-mode" style="text-align: center; margin-top: 15px;">
+                    <span id="switch-text">还没有账号？</span>
+                    <a href="#" id="switch-link" style="color: #1890ff; cursor: pointer;">立即注册</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 活动详情模态框 -->
+    <div id="activity-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">活动详情</h2>
+                <button class="close-btn" id="close-activity">&times;</button>
+            </div>
+            <div class="activity-detail" id="modal-detail">
+                <!-- 活动详情内容将通过JavaScript动态填充 -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 活动数据
+        const activities = [
+            {
+                id: 1,
+                title: "南航会员日特惠活动",
+                time: "2023-12-15 10:00",
+                participants: 128,
+                image: "#1890ff",
+                imageText: "南航会员日",
+                description: "南航会员专享折扣，国内航线低至5折，国际航线7折起。活动期间购买机票还可获得双倍里程积分。名额有限，先到先得！",
+                details: "\n南航会员日特惠活动详情：\n\n活动时间：2023年12月15日 10:00 - 2023年12月20日 24:00\n\n活动内容：\n1. 国内航线低至5折优惠\n2. 国际航线7折起\n3. 活动期间购票可获得双倍里程积分\n4. 会员专享额外礼包\n\n参与方式：\n- 登录南航官网或APP\n- 选择会员日特惠专区\n- 输入优惠码：CSAIRDAY\n\n活动规则：\n- 本活动仅限南航明珠会员参与\n- 优惠票数量有限，先到先得\n- 特价票退票改签规则以具体票规为准\n- 活动最终解释权归南方航空所有"
+            },
+            {                id: 2,                title: "鹭云集团环球旅行优惠",                time: "2024-01-05 09:30",                participants: 85,                image: "#52c41a",                imageText: "鹭云集团优惠",                description: "鹭云集团成员航空公司联合推出环球旅行套票，一次购买多段航程享更多优惠。支持灵活变更行程，满足您的旅行需求。",                details: "\n鹭云集团环球旅行优惠详情：\n\n活动时间：2024年1月5日 09:30 - 2024年2月28日 24:00\n\n参与航空公司：\n南方航空、东方航空、厦门航空、法国航空、荷兰皇家航空等鹭云集团成员\n\n活动内容：\n1. 环球旅行套票最低7折起\n2. 一次购买多段航程可享受额外95折\n3. 套票支持灵活变更行程（需支付少量手续费）\n4. 额外赠送鹭云集团精英会员积分\n\n行程规划：\n- 可选择3-15个航段\n- 支持顺时针或逆时针环球旅行\n- 最短停留时间3天，最长停留时间1年\n\n预订方式：\n- 登录鹭云集团官网\n- 联系各成员航空公司客服\n- 前往指定旅行社咨询"            },
+            {
+                id: 3,
+                title: "新年机票促销活动",
+                time: "2024-01-20 14:00",
+                participants: 203,
+                image: "#faad14",
+                imageText: "新年促销",
+                description: "迎接新年，南航推出机票促销活动，热门城市航线低至4折。提前30天预订还可享受额外9折优惠。春节出行的旅客不要错过！",
+                details: "\n新年机票促销活动详情：\n\n活动时间：2024年1月20日 14:00 - 2024年2月5日 24:00\n\n促销航线：\n北京-上海、广州-深圳、上海-成都、北京-广州等热门城市航线\n\n活动内容：\n1. 热门航线机票低至4折\n2. 提前30天预订可享受额外9折\n3. 购买往返机票赠送机场贵宾室体验券\n4. 儿童票额外优惠\n\n春节特别优惠：\n- 春节期间（2024年2月10日-2月17日）出行的旅客，可获得新年礼品一份\n- 家庭出行（2大1小及以上）可享受免费升舱机会\n\n注意事项：\n- 特价票数量有限，先到先得\n- 优惠不可与其他活动同时使用\n- 具体折扣以实际查询为准"
+            },
+            {
+                id: 4,
+                title: "高端会员专享活动",
+                time: "2024-02-10 15:30",
+                participants: 42,
+                image: "#eb2f96",
+                imageText: "会员专享",
+                description: "南航明珠金银卡会员专享活动，参与即可获得优先登机、额外行李额、贵宾室体验等特权。更有机会获得免费升舱券。",
+                details: "\n高端会员专享活动详情：\n\n活动时间：2024年2月10日 15:30 - 2024年3月31日 24:00\n\n参与资格：\n南航明珠金卡、银卡会员\n\n活动特权：\n1. 优先登机特权（所有航班）\n2. 额外10kg行李额\n3. 免费机场贵宾室体验（每月2次）\n4. 专属值机柜台服务\n5. 航班延误优先安排\n\n特别奖励：\n- 活动期间累积飞行里程达到20000公里，可获得免费升舱券一张\n- 活动期间推荐3位新会员加入，可获得额外5000奖励里程\n\n参与方式：\n- 登录南航APP会员中心，点击\"高端会员专享活动\"进行报名\n- 活动开始后自动享受相关特权\n\n温馨提示：\n特权使用需出示电子会员卡，具体使用规则以各机场实际执行为准"
+            }
+        ];
+        
+        // DOM元素
+        const loginModal = document.getElementById('login-modal');
+        const closeLogin = document.getElementById('close-login');
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const loginBtn = document.querySelector('.login-btn');
+        const registerBtn = document.querySelector('.register-btn');
+        const logoutBtn = document.createElement('button');
+        logoutBtn.className = 'logout-btn';
+        logoutBtn.textContent = '退出';
+        const nav = document.querySelector('.nav');
+        const navButtons = nav.querySelector('button:last-child').parentNode;
+        
+        const activityModal = document.getElementById('activity-modal');
+        const closeActivity = document.getElementById('close-activity');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDetail = document.getElementById('modal-detail');
+        const viewButtons = document.querySelectorAll('.view-btn');
+        
+        // 登录/注册切换元素
+        const switchText = document.getElementById('switch-text');
+        const switchLink = document.getElementById('switch-link');
+        const loginModalTitle = document.getElementById('login-modal-title');
+        
+        // 用户状态
+        let currentUser = null;
+        
+        // 检查localStorage中的token，自动登录
+        function checkAuthToken() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                fetch('http://localhost:5000/api/auth/me', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.username) {
+                        currentUser = {
+                            id: data.id,
+                            username: data.username,
+                            isAdmin: data.isAdmin
+                        };
+                    }
+                    updateUserInterface();
+                })
+                .catch(error => {
+                    console.error('Auth check error:', error);
+                    localStorage.removeItem('token');
+                    updateUserInterface();
+                });
+            } else {
+                updateUserInterface();
+            }
+        }
+        
+        // 打开登录模态框
+        function openLoginModal() {
+            loginModalTitle.textContent = '用户登录';
+            document.querySelector('#login-submit').textContent = '登录';
+            document.getElementById('confirm-password-container').style.display = 'none';
+            switchText.textContent = '还没有账号？';
+            switchLink.textContent = '立即注册';
+            loginModal.classList.add('active');
+            loginError.style.display = 'none';
+            loginForm.reset();
+        }
+        
+        // 打开注册模态框
+        function openRegisterModal() {
+            loginModalTitle.textContent = '用户注册';
+            document.querySelector('#login-submit').textContent = '注册';
+            document.getElementById('confirm-password-container').style.display = 'block';
+            switchText.textContent = '已有账号？';
+            switchLink.textContent = '立即登录';
+            loginModal.classList.add('active');
+            loginError.style.display = 'none';
+            loginForm.reset();
+        }
+        
+        // 切换登录/注册模式
+        switchLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (loginModalTitle.textContent === '用户登录') {
+                openRegisterModal();
+            } else {
+                openLoginModal();
+            }
+            loginError.style.display = 'none';
+        });
+        
+        // 关闭登录模态框
+        function closeLoginModal() {
+            loginModal.classList.remove('active');
+        }
+        
+        // 打开活动详情模态框
+        function openActivityModal(activityId) {
+            const activity = activities.find(a => a.id === activityId);
+            if (activity) {
+                modalTitle.textContent = activity.title;
+                
+                // 填充活动详情内容
+                modalDetail.innerHTML = `
+                    <div class="detail-image" style="background-color: ${activity.image};"><div class="image-text">${activity.imageText}</div></div>
+                    <div class="detail-meta">
+                        <div class="detail-meta-item">
+                            <i>🕒</i> ${activity.time}
+                        </div>
+                        <div class="detail-meta-item">
+                            <i>👥</i> ${activity.participants}人参与
+                        </div>
+                    </div>
+                    <div class="detail-content">
+                        ${activity.details.replace(/\n/g, '<br>')}
+                    </div>
+                    <button class="join-btn" onclick="joinActivity(${activity.id})">
+                        ${currentUser ? '立即参与' : '登录后参与'}
+                    </button>
+                `;
+                
+                activityModal.classList.add('active');
+            }
+        }
+        
+        // 关闭活动详情模态框
+        function closeActivityModal() {
+            activityModal.classList.remove('active');
+        }
+        
+        // 处理登录
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 检查登录模态框标题，判断是登录还是注册
+            const modalTitle = document.querySelector('#login-modal h2').textContent;
+            
+            if (modalTitle.includes('登录')) {
+                // 登录请求
+                fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.token) {
+                        // 登录成功
+                        currentUser = {
+                            id: data.user.id,
+                            username: data.user.username,
+                            isAdmin: data.user.isAdmin
+                        };
+                        
+                        // 保存token到localStorage
+                        localStorage.setItem('token', data.token);
+                        
+                        // 更新UI显示
+                        updateUserInterface();
+                        closeLoginModal();
+                        alert(`欢迎，${username}！`);
+                    } else {
+                        // 登录失败
+                        loginError.textContent = data.message || '用户名或密码错误';
+                        loginError.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    loginError.textContent = '登录失败，请稍后重试';
+                    loginError.style.display = 'block';
+                    console.error('Login error:', error);
+                });
+            } else {
+                // 验证两次输入的密码是否一致
+                const confirmPassword = document.getElementById('confirm-password').value;
+                if (password !== confirmPassword) {
+                    loginError.textContent = '两次输入的密码不一致';
+                    loginError.style.display = 'block';
+                    return;
+                }
+                
+                // 验证用户名规则：3-5个字符
+                if (username.length < 3 || username.length > 5) {
+                    loginError.textContent = '用户名必须为3-5个字符';
+                    loginError.style.display = 'block';
+                    return;
+                }
+                
+                // 验证密码规则：至少6个字符，包含数字和字母
+                const hasLetter = /[a-zA-Z]/.test(password);
+                const hasNumber = /\d/.test(password);
+                const hasMinLength = password.length >= 6;
+                
+                if (!hasMinLength) {
+                    loginError.textContent = '密码至少需要6个字符';
+                    loginError.style.display = 'block';
+                    return;
+                }
+                
+                if (!hasLetter || !hasNumber) {
+                    loginError.textContent = '密码必须包含字母和数字';
+                    loginError.style.display = 'block';
+                    return;
+                }
+                
+                // 注册请求
+                fetch('http://localhost:5000/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ username, password })
+                    })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.token) {
+                        // 注册成功
+                        alert('注册成功，正在为您自动登录...');
+                        
+                        // 登录用户
+                        currentUser = {
+                            id: data.user.id,
+                            username: data.user.username,
+                            isAdmin: data.user.isAdmin
+                        };
+                        
+                        // 保存token到localStorage
+                        localStorage.setItem('token', data.token);
+                        
+                        // 更新UI显示
+                        updateUserInterface();
+                        closeLoginModal();
+                    } else {
+                        // 注册失败
+                        loginError.textContent = data.message || '注册失败';
+                        loginError.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    loginError.textContent = '注册失败，请稍后重试';
+                    loginError.style.display = 'block';
+                    console.error('Registration error:', error);
+                });
+            }
+        }
+        
+        // 处理退出登录
+        function handleLogout() {
+            console.log('Logout button clicked');
+            currentUser = null;
+            // 清除localStorage中的token
+            localStorage.removeItem('token');
+            updateUserInterface();
+            alert('您已成功退出登录');
+        }
+        
+        // 更新用户界面
+        function updateUserInterface() {
+            const loginBtnElement = document.querySelector('.login-btn');
+            const registerBtnElement = document.querySelector('.register-btn');
+            const navButtonsContainer = loginBtnElement.parentNode;
+            
+            if (currentUser) {
+                // 用户已登录
+                if (loginBtnElement) navButtonsContainer.removeChild(loginBtnElement);
+                if (registerBtnElement) navButtonsContainer.removeChild(registerBtnElement);
+                
+                // 添加用户信息和退出按钮
+                if (!document.querySelector('.user-info')) {
+                    const userInfo = document.createElement('div');
+                    userInfo.className = 'user-info';
+                    userInfo.innerHTML = `
+                        <span class="user-name">欢迎, ${currentUser.username}</span>
+                    `;
+                    userInfo.appendChild(logoutBtn);
+                    navButtonsContainer.appendChild(userInfo);
+                }
+            } else {
+                // 用户未登录
+                const userInfo = document.querySelector('.user-info');
+                if (userInfo) navButtonsContainer.removeChild(userInfo);
+                
+                // 确保登录和注册按钮存在
+                if (!document.querySelector('.login-btn')) {
+                    const loginBtnNew = document.createElement('button');
+                    loginBtnNew.className = 'login-btn';
+                    loginBtnNew.textContent = '登录';
+                    loginBtnNew.addEventListener('click', openLoginModal);
+                    navButtonsContainer.appendChild(loginBtnNew);
+                }
+                
+                if (!document.querySelector('.register-btn')) {
+                    const registerBtnNew = document.createElement('button');
+                    registerBtnNew.className = 'register-btn';
+                    registerBtnNew.textContent = '注册';
+                    registerBtnNew.addEventListener('click', function() {
+                        openRegisterModal();
+                    });
+                    navButtonsContainer.appendChild(registerBtnNew);
+                }
+            }
+        }
+        
+        // 参与活动
+        function joinActivity(activityId) {
+            if (currentUser) {
+                const activity = activities.find(a => a.id === activityId);
+                if (activity) {
+                    activity.participants += 1;
+                    alert(`您已成功参与活动：${activity.title}\n当前参与人数：${activity.participants}`);
+                    
+                    // 更新UI上的参与人数
+                    const card = document.querySelector(`.activity-card:nth-child(${activityId})`);
+                    if (card) {
+                        const participantsElement = card.querySelector('.card-participants');
+                        if (participantsElement) {
+                            participantsElement.innerHTML = `<span class="participants-icon">👥</span> ${activity.participants}人参与`;
+                        }
+                    }
+                }
+            } else {
+                alert('请先登录');
+                openLoginModal();
+            }
+        }
+        
+        // 添加事件监听器
+        document.addEventListener('DOMContentLoaded', function() {
+            // 登录相关
+            closeLogin.addEventListener('click', closeLoginModal);
+            loginForm.addEventListener('submit', handleLogin);
+            
+            // 点击模态框外部关闭
+            loginModal.addEventListener('click', function(e) {
+                if (e.target === loginModal) closeLoginModal();
+            });
+            
+            // 注意：退出按钮的事件监听将通过事件委托方式实现，见下文
+            
+            // 活动详情相关
+            closeActivity.addEventListener('click', closeActivityModal);
+            
+            // 点击模态框外部关闭
+            activityModal.addEventListener('click', function(e) {
+                if (e.target === activityModal) closeActivityModal();
+            });
+            
+            // 查看详情按钮
+            viewButtons.forEach((button, index) => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openActivityModal(index + 1); // 活动ID从1开始
+                });
+            });
+            
+            // 初始化用户界面，检查认证状态
+            checkAuthToken();
+            
+            // 使用事件委托为登录、注册和退出按钮添加事件监听，确保动态创建的按钮也能正常工作
+            document.addEventListener('click', function(e) {
+                console.log('点击事件触发，目标元素:', e.target.className);
+                if (e.target.matches('.login-btn')) {
+                    console.log('登录按钮被点击');
+                    openLoginModal();
+                } else if (e.target.matches('.register-btn')) {
+                    console.log('注册按钮被点击');
+                    openRegisterModal();
+                } else if (e.target.matches('.logout-btn')) {
+                    console.log('退出按钮被点击');
+                    handleLogout();
+                }
+            });
+        });
+        
+        // 全局函数，供模态框中的按钮调用
+        window.joinActivity = joinActivity;
+    </script>
+</body>
+</html>
